@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mobile Offer - Meesho Style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    body {
+      background: #f5f3ff;
+      padding: 10px;
+    }
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    /* Header */
+    .header {
+      background: #e71c64;
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-logo {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .header-badge {
+      background: #ffe46b;
+      color: #3c2a00;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Panels */
+    .panel {
+      display: none;
+      padding: 16px;
+    }
+    .panel.active {
+      display: block;
+    }
+
+    /* Product panel */
+    .product-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .product-image-box {
+      flex: 1 1 260px;
+      min-width: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+    }
+    .product-image {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 3/4;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #fce2ec, #ffe6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8c4770;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .product-details {
+      flex: 1 1 260px;
+      min-width: 240px;
+      padding: 4px;
+    }
+    .product-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #222222;
+    }
+    .product-subtitle {
+      font-size: 13px;
+      color: #666666;
+      margin-bottom: 10px;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .price-main {
+      font-size: 22px;
+      font-weight: 700;
+      color: #222;
+    }
+    .price-mrp {
+      font-size: 13px;
+      color: #999;
+      text-decoration: line-through;
+    }
+    .price-off {
+      font-size: 12px;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    .tag-line {
+      font-size: 12px;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+    .badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid #f1e0f5;
+      background: #fdf7ff;
+      color: #5b2b5b;
+    }
+    .feature-list {
+      font-size: 12px;
+      color: #555;
+      list-style: disc;
+      padding-left: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 10px 16px;
+      border-radius: 6px;
+    }
+    .btn-primary {
+      background: #e71c64;
+      color: #ffffff;
+      font-weight: 600;
+      flex: 1 1 140px;
+    }
+    .btn-secondary {
+      background: #ffe5f0;
+      color: #e71c64;
+      border: 1px solid #f5a7c8;
+      font-weight: 500;
+      flex: 1 1 140px;
+    }
+
+    /* Address and Payment panels */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #222;
+    }
+    .section-subtitle {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      color: #333;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .qr-box {
+      text-align: center;
+      margin-top: 8px;
+    }
+    .qr-placeholder {
+      width: 220px;
+      max-width: 60vw;
+      aspect-ratio: 1/1;
+      margin: 0 auto 10px;
+      border-radius: 12px;
+      border: 2px dashed #c093c5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #8a5597;
+      padding: 8px;
+    }
+    .info-line {
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 4px;
+    }
+    .info-small {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      padding: 8px 12px 14px;
+      border-top: 1px solid #f1e5f6;
+      background: #fff9ff;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .product-layout {
+        flex-direction: column;
+      }
+      .product-image {
+        max-width: 260px;
+      }
+      .btn-row {
+        flex-direction: column;
+      }
+      .page {
+        border-radius: 0;
+      }
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-logo">Meesho Style Clone</div>
+    <div class="header-badge">Limited Period Mobile Offer</div>
+  </header>
+
+  <!-- PANEL 1: PRODUCT -->
+  <section id="panel-product" class="panel active">
+    <div class="product-layout">
+      <div class="product-image-box">
+        <!-- You can replace this with <img src="mobile.jpg" class="product-image" /> -->
+        <div class="product-image">
+          Your Mobile Image
+        </div>
+      </div>
+
+      <div class="product-details">
+        <div class="product-title">SmartX Pro 5G Smartphone</div>
+        <div class="product-subtitle">8GB RAM · 128GB Storage · 5000mAh Battery</div>
+
+        <div class="price-row">
+          <span class="price-main">₹12,999</span>
+          <span class="price-mrp">₹17,999</span>
+          <span class="price-off">28% OFF</span>
+        </div>
+        <div class="tag-line">Free delivery · Only online payment · 1 Year Warranty</div>
+
+        <div class="badge-strip">
+          <span class="badge">4.5 ★ Rated</span>
+          <span class="badge">Fast Shipping</span>
+          <span class="badge">Best Seller</span>
+        </div>
+
+        <ul class="feature-list">
+          <li>6.5" FHD+ display with smooth 90–120Hz feel.</li>
+          <li>50MP AI triple camera + clear selfie camera.</li>
+          <li>5G ready · Dual SIM · Type‑C fast charging.</li>
+        </ul>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="showPanel('address')">Book Now</button>
+          <button class="btn-secondary" onclick="scrollToTop()">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 2: ADDRESS -->
+  <section id="panel-address" class="panel">
+    <div class="section-title">Enter delivery details</div>
+    <div class="section-subtitle">
+      Please fill correct name, mobile and address. Order confirmation will be sent on WhatsApp / SMS.
+    </div>
+
+    <form onsubmit="goToPayment(event)">
+      <label for="custName">Full Name</label>
+      <input type="text" id="custName" required />
+
+      <label for="custPhone">Mobile Number</label>
+      <input type="tel" id="custPhone" required />
+
+      <label for="custAddress">Full Address (House no, Area, City, Pincode)</label>
+      <textarea id="custAddress" required></textarea>
+
+      <label for="custState">State</label>
+      <input type="text" id="custState" placeholder="Example: Maharashtra" />
+
+      <label for="custQty">Quantity</label>
+      <select id="custQty">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+
+      <div class="btn-row">
+        <button type="button" class="btn-secondary" onclick="showPanel('product')">Back</button>
+        <button type="submit" class="btn-primary">Next: Online Payment</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- PANEL 3: PAYMENT -->
+  <section id="panel-payment" class="panel">
+    <div class="section-title">Pay securely by QR</div>
+    <div class="section-subtitle">
+      Only online UPI payment is accepted for this offer. Scan the QR code using any UPI app and pay exact amount.
+    </div>
+
+    <div class="qr-box">
+      <!-- Replace this box with your QR image when ready -->
+      <!-- Example later: <img src="YOUR_QR_IMAGE_LINK" alt="UPI QR" class="qr-img" /> -->
+      <div class="qr-placeholder">
+        YOUR UPI QR IMAGE HERE
+        <br />
+        (replace this box with &lt;img src=&quot;your_qr.png&quot; /&gt;)
+      </div>
+
+      <p class="info-line"><b>Amount:</b> ₹12,999 per mobile</p>
+      <p class="info-line"><b>UPI Name / ID:</b> yourname@upi</p>
+      <p class="info-small">
+        After payment, take screenshot and send on our WhatsApp with your name and mobile number for fast confirmation.
+      </p>
+    </div>
+
+    <div class="btn-row" style="margin-top: 14px;">
+      <button type="button" class="btn-secondary" onclick="showPanel('address')">Back: Edit Address</button>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Demo Meesho-style single mobile booking flow (Product → Address → QR payment). Add your own images, QR and backend/WhatsApp for real orders.
+  </div>
+</div>
+
+<script>
+  function showPanel(name) {
+    const panels = ["product", "address", "payment"];
+    panels.forEach(function(p) {
+      document.getElementById("panel-" + p).classList.remove("active");
+    });
+    document.getElementById("panel-" + name).classList.add("active");
+    scrollToTop();
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goToPayment(e) {
+    e.preventDefault();
+    const name = document.getElementById("custName").value.trim();
+    const phone = document.getElementById("custPhone").value.trim();
+    const addr = document.getElementById("custAddress").value.trim();
+
+    if (!name || !phone || !addr) {
+      alert("Please fill all required address details.");
+      return;
+    }
+    showPanel("payment");
+  }
+</script>
+
+</body>
+</html>
