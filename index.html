@@ -1,316 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mobile Offer - Meesho Style</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    }
-    body {
-      background: #f5f3ff;
-      padding: 10px;
-    }
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    }
+<meta charset="UTF-8" />
+<title>Vape Offer - Booking + Live Chat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  /* Meesho colors and responsive layout */
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+  body { background: #f5f3ff; padding: 10px; }
+  .page { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); overflow: hidden; }
 
-    /* Header */
-    .header {
-      background: #e71c64;
-      color: #ffffff;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .header-logo {
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .header-badge {
-      background: #ffe46b;
-      color: #3c2a00;
-      padding: 4px 10px;
-      border-radius: 14px;
-      font-size: 11px;
-      font-weight: 600;
-    }
+  .header { background: #e71c64; color: #fff; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .header-logo { font-weight: 700; font-size: 18px; }
+  .header-badge { background: #ffe46b; color: #3c2a00; padding: 4px 10px; border-radius: 14px; font-size: 11px; font-weight: 600; }
 
-    /* Panels */
-    .panel {
-      display: none;
-      padding: 16px;
-    }
-    .panel.active {
-      display: block;
-    }
+  .panel { display: none; padding: 16px; }
+  .panel.active { display: block; }
 
-    /* Product panel */
-    .product-layout {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .product-image-box {
-      flex: 1 1 260px;
-      min-width: 230px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px;
-    }
-    .product-image {
-      width: 100%;
-      max-width: 320px;
-      aspect-ratio: 3/4;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #fce2ec, #ffe6ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8c4770;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .product-details {
-      flex: 1 1 260px;
-      min-width: 240px;
-      padding: 4px;
-    }
-    .product-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #222222;
-    }
-    .product-subtitle {
-      font-size: 13px;
-      color: #666666;
-      margin-bottom: 10px;
-    }
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-    .price-main {
-      font-size: 22px;
-      font-weight: 700;
-      color: #222;
-    }
-    .price-mrp {
-      font-size: 13px;
-      color: #999;
-      text-decoration: line-through;
-    }
-    .price-off {
-      font-size: 12px;
-      color: #2e7d32;
-      font-weight: 600;
-    }
-    .tag-line {
-      font-size: 12px;
-      color: #2e7d32;
-      margin-bottom: 8px;
-    }
-    .badge-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-    .badge {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid #f1e0f5;
-      background: #fdf7ff;
-      color: #5b2b5b;
-    }
-    .feature-list {
-      font-size: 12px;
-      color: #555;
-      list-style: disc;
-      padding-left: 16px;
-      margin-bottom: 8px;
-    }
+  /* Product panel */
+  .product-layout { display: flex; flex-wrap: wrap; gap: 16px; }
+  .product-image-box { flex: 1 1 260px; min-width: 230px; display: flex; justify-content: center; align-items: center; padding: 12px; }
+  .product-image {
+    width: 100%; max-width: 320px; aspect-ratio: 3/4; border-radius: 10px;
+    background: linear-gradient(135deg, #fce2ec, #ffe6ff);
+    display: flex; align-items: center; justify-content: center;
+    color: #8c4770; font-weight: 600; font-size: 14px;
+  }
+  .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px; }
+  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
+  .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
+  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .price-main { font-size: 22px; font-weight: 700; color: #222; }
+  .price-mrp { font-size: 13px; color: #999; text-decoration: line-through; }
+  .price-off { font-size: 12px; color: #2e7d32; font-weight: 600; }
+  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 8px; }
+  .badge-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .badge {
+    font-size: 11px; padding: 4px 8px; border-radius: 999px;
+    border: 1px solid #f1e0f5; background: #fdf7ff; color: #5b2b5b;
+  }
+  .feature-list {
+    font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px;
+  }
+  .btn-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  button {
+    border: none; cursor: pointer; font-size: 14px; padding: 10px 16px; border-radius: 6px;
+    flex: 1 1 140px;
+  }
+  .btn-primary { background: #e71c64; color: #fff; font-weight: 600; }
+  .btn-secondary { background: #ffe5f0; color: #e71c64; border: 1px solid #f5a7c8; font-weight: 500; }
 
-    /* Buttons */
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    button {
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      padding: 10px 16px;
-      border-radius: 6px;
-    }
-    .btn-primary {
-      background: #e71c64;
-      color: #ffffff;
-      font-weight: 600;
-      flex: 1 1 140px;
-    }
-    .btn-secondary {
-      background: #ffe5f0;
-      color: #e71c64;
-      border: 1px solid #f5a7c8;
-      font-weight: 500;
-      flex: 1 1 140px;
-    }
+  /* Address, Payment, Chat */
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222; }
+  .section-subtitle { font-size: 12px; color: #777; margin-bottom: 12px; }
+  label {
+    display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; color: #333;
+  }
+  input, textarea, select {
+    width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px;
+  }
+  textarea { resize: vertical; min-height: 70px; }
 
-    /* Address and Payment panels */
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #222;
-    }
-    .section-subtitle {
-      font-size: 12px;
-      color: #777;
-      margin-bottom: 12px;
-    }
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 3px;
-      color: #333;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #ddd;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    textarea {
-      resize: vertical;
-      min-height: 70px;
-    }
+  .qr-box {
+    text-align: center; margin-top: 8px;
+  }
+  .qr-placeholder {
+    width: 220px; max-width: 60vw;
+    aspect-ratio: 1/1;
+    margin: 0 auto 10px;
+    border-radius: 12px;
+    border: 2px dashed #c093c5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #8a5597;
+    padding: 8px;
+  }
+  .info-line {
+    font-size: 13px; color: #444; margin-bottom: 4px;
+  }
+  .info-small {
+    font-size: 11px; color: #777;
+  }
 
-    .qr-box {
-      text-align: center;
-      margin-top: 8px;
-    }
-    .qr-placeholder {
-      width: 220px;
-      max-width: 60vw;
-      aspect-ratio: 1/1;
-      margin: 0 auto 10px;
-      border-radius: 12px;
-      border: 2px dashed #c093c5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #8a5597;
-      padding: 8px;
-    }
-    .info-line {
-      font-size: 13px;
-      color: #444;
-      margin-bottom: 4px;
-    }
-    .info-small {
-      font-size: 11px;
-      color: #777;
-    }
+  /* Chat styles */
+  .chat-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    background: #fff0f6;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  .chat-message {
+    margin-bottom: 8px;
+    max-width: 80%;
+    padding: 6px 10px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .chat-message.admin {
+    background-color: #e71c64;
+    color: #fff;
+    align-self: flex-start;
+  }
+  .chat-message.user {
+    background-color: #fce2ec;
+    color: #8c4770;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  .chat-input-row {
+    margin-top: 10px;
+    display: flex;
+  }
+  .chat-input {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 6px 0 0 6px;
+    border: 1px solid #ddd;
+  }
+  .chat-send-btn {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    background: #e71c64;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0 6px 6px 0;
+  }
 
-    .footer-note {
-      font-size: 11px;
-      color: #888;
-      text-align: center;
-      padding: 8px 12px 14px;
-      border-top: 1px solid #f1e5f6;
-      background: #fff9ff;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-      .product-layout {
-        flex-direction: column;
-      }
-      .product-image {
-        max-width: 260px;
-      }
-      .btn-row {
-        flex-direction: column;
-      }
-      .page {
-        border-radius: 0;
-      }
-      body {
-        padding: 0;
-        background: #ffffff;
-      }
-    }
-  </style>
+  @media (max-width: 600px) {
+    .header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .product-layout { flex-direction: column; }
+    .btn-row { flex-direction: column; }
+    .page { border-radius: 0; }
+    body { padding: 0; background: #fff; }
+  }
+</style>
 </head>
 <body>
-
 <div class="page">
-  <!-- Header -->
   <header class="header">
-    <div class="header-logo">Meesho Style Clone</div>
-    <div class="header-badge">Limited Period Mobile Offer</div>
+    <div class="header-logo">Meesho Style Clone - Vape</div>
+    <div class="header-badge">Limited Time Vape Offer</div>
   </header>
 
-  <!-- PANEL 1: PRODUCT -->
+  <!-- PRODUCT PANEL -->
   <section id="panel-product" class="panel active">
     <div class="product-layout">
       <div class="product-image-box">
-        <!-- You can replace this with <img src="mobile.jpg" class="product-image" /> -->
-        <div class="product-image">
-          Your Mobile Image
-        </div>
+        <div class="product-image">Your Vape Image</div>
       </div>
-
       <div class="product-details">
-        <div class="product-title">SmartX Pro 5G Smartphone</div>
-        <div class="product-subtitle">8GB RAM · 128GB Storage · 5000mAh Battery</div>
-
+        <div class="product-title">UltraVape Pro Kit</div>
+        <div class="product-subtitle">Compact · Long Battery · Multiple Flavors</div>
         <div class="price-row">
-          <span class="price-main">₹12,999</span>
-          <span class="price-mrp">₹17,999</span>
-          <span class="price-off">28% OFF</span>
+          <span class="price-main">₹3,499</span>
+          <span class="price-mrp">₹4,999</span>
+          <span class="price-off">30% OFF</span>
         </div>
-        <div class="tag-line">Free delivery · Only online payment · 1 Year Warranty</div>
-
+        <div class="tag-line">Free delivery · Online payment only · 6-Month Warranty</div>
         <div class="badge-strip">
-          <span class="badge">4.5 ★ Rated</span>
-          <span class="badge">Fast Shipping</span>
+          <span class="badge">4.7 ★ Rated</span>
           <span class="badge">Best Seller</span>
+          <span class="badge">Flavors: Mango, Mint, Berry</span>
         </div>
-
         <ul class="feature-list">
-          <li>6.5" FHD+ display with smooth 90–120Hz feel.</li>
-          <li>50MP AI triple camera + clear selfie camera.</li>
-          <li>5G ready · Dual SIM · Type‑C fast charging.</li>
+          <li>Delivers smooth vapor and rich flavor</li>
+          <li>Long battery life with quick charging</li>
+          <li>Portable design for convenience</li>
         </ul>
-
         <div class="btn-row">
           <button class="btn-primary" onclick="showPanel('address')">Book Now</button>
           <button class="btn-secondary" onclick="scrollToTop()">View Details</button>
@@ -319,33 +185,27 @@
     </div>
   </section>
 
-  <!-- PANEL 2: ADDRESS -->
+  <!-- ADDRESS PANEL -->
   <section id="panel-address" class="panel">
     <div class="section-title">Enter delivery details</div>
     <div class="section-subtitle">
-      Please fill correct name, mobile and address. Order confirmation will be sent on WhatsApp / SMS.
+      Please provide accurate details. We'll contact you on WhatsApp/SMS.
     </div>
-
-    <form onsubmit="goToPayment(event)">
+    <form id="addressForm" onsubmit="goToPayment(event)">
       <label for="custName">Full Name</label>
       <input type="text" id="custName" required />
-
       <label for="custPhone">Mobile Number</label>
       <input type="tel" id="custPhone" required />
-
-      <label for="custAddress">Full Address (House no, Area, City, Pincode)</label>
+      <label for="custAddress">Full Address (House no, Area, City, Pin)</label>
       <textarea id="custAddress" required></textarea>
-
       <label for="custState">State</label>
       <input type="text" id="custState" placeholder="Example: Maharashtra" />
-
       <label for="custQty">Quantity</label>
       <select id="custQty">
-        <option value="1">1</option>
+        <option value="1" selected>1</option>
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
-
       <div class="btn-row">
         <button type="button" class="btn-secondary" onclick="showPanel('product')">Back</button>
         <button type="submit" class="btn-primary">Next: Online Payment</button>
@@ -353,66 +213,138 @@
     </form>
   </section>
 
-  <!-- PANEL 3: PAYMENT -->
+  <!-- PAYMENT PANEL -->
   <section id="panel-payment" class="panel">
     <div class="section-title">Pay securely by QR</div>
-    <div class="section-subtitle">
-      Only online UPI payment is accepted for this offer. Scan the QR code using any UPI app and pay exact amount.
-    </div>
-
+    <div class="section-subtitle">Scan the QR code using UPI and pay the total amount.</div>
     <div class="qr-box">
-      <!-- Replace this box with your QR image when ready -->
-      <!-- Example later: <img src="YOUR_QR_IMAGE_LINK" alt="UPI QR" class="qr-img" /> -->
-      <div class="qr-placeholder">
-        YOUR UPI QR IMAGE HERE
-        <br />
-        (replace this box with &lt;img src=&quot;your_qr.png&quot; /&gt;)
-      </div>
-
-      <p class="info-line"><b>Amount:</b> ₹12,999 per mobile</p>
+      <div class="qr-placeholder">YOUR UPI QR IMAGE HERE<br>(Replace this with &lt;img src='your_qr.png' /&gt;)</div>
+      <p class="info-line"><b>Amount:</b> ₹3,499 per vape kit</p>
       <p class="info-line"><b>UPI Name / ID:</b> yourname@upi</p>
-      <p class="info-small">
-        After payment, take screenshot and send on our WhatsApp with your name and mobile number for fast confirmation.
-      </p>
+      <p class="info-small">After payment, take screenshot and send on WhatsApp with your name and mobile for confirmation.</p>
     </div>
-
     <div class="btn-row" style="margin-top: 14px;">
       <button type="button" class="btn-secondary" onclick="showPanel('address')">Back: Edit Address</button>
     </div>
-  </section>
 
-  <div class="footer-note">
-    Demo Meesho-style single mobile booking flow (Product → Address → QR payment). Add your own images, QR and backend/WhatsApp for real orders.
-  </div>
+    <!-- Live Chat With Admin -->
+    <div class="section-title" style="margin-top: 26px;">Chat with support</div>
+    <div class="chat-container" id="chatContainer"></div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" class="chat-input" placeholder="Type message and press enter..." autocomplete="off" />
+      <button class="chat-send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </section>
 </div>
 
-<script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import {
+    getDatabase, ref, set, push, onDisconnect, onValue, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+  // Firebase config (your details)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAJiYRkrFv3th8muAxWDZ_Fzve3s-_AcI0",
+    authDomain: "catt-a1b22.firebaseapp.com",
+    databaseURL: "https://catt-a1b22-default-rtdb.firebaseio.com",
+    projectId: "catt-a1b22",
+    storageBucket: "catt-a1b22.firebasestorage.app",
+    messagingSenderId: "450976381194",
+    appId: "1:450976381194:web:144da5bbc9f5ea6af0a2f3",
+    measurementId: "G-93XR3YKSRQ"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // User unique session id
+  const sessionId = "sess_" + Math.random().toString(36).substring(2, 10);
+
+  // Live user presence ref
+  const userRef = ref(db, "liveUsers/" + sessionId);
+
+  // Keep live user presence updated every 30s and remove on disconnect
+  function updatePresence() {
+    set(userRef, { lastActive: Date.now() });
+    onDisconnect(userRef).remove();
+  }
+  updatePresence();
+  setInterval(updatePresence, 30000);
+
   function showPanel(name) {
-    const panels = ["product", "address", "payment"];
-    panels.forEach(function(p) {
-      document.getElementById("panel-" + p).classList.remove("active");
+    ["product", "address", "payment"].forEach(id => {
+      document.getElementById("panel-" + id).classList.remove("active");
     });
     document.getElementById("panel-" + name).classList.add("active");
-    scrollToTop();
-  }
-
-  function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function goToPayment(e) {
-    e.preventDefault();
+  // Booking submission writes to database bookings, then moves to payment panel
+  const addressForm = document.getElementById("addressForm");
+  addressForm.addEventListener("submit", function(event) {
+    event.preventDefault();
     const name = document.getElementById("custName").value.trim();
     const phone = document.getElementById("custPhone").value.trim();
-    const addr = document.getElementById("custAddress").value.trim();
+    const address = document.getElementById("custAddress").value.trim();
+    const qty = document.getElementById("custQty").value;
 
-    if (!name || !phone || !addr) {
-      alert("Please fill all required address details.");
+    if (!name || !phone || !address) {
+      alert("Please fill all required fields.");
       return;
     }
-    showPanel("payment");
-  }
-</script>
 
+    const bookingsRef = ref(db, "bookings");
+    push(bookingsRef, {
+      name,
+      phone,
+      address,
+      quantity: qty,
+      timestamp: Date.now()
+    }).then(() => {
+      showPanel("payment");
+    }).catch(() => {
+      alert("Booking failed. Please try again.");
+    });
+  });
+
+  // Chat logic
+  const chatContainer = document.getElementById("chatContainer");
+  const chatInput = document.getElementById("chatInput");
+  const chatRef = ref(db, "chats/" + sessionId);
+
+  // Listen for incoming messages for this session
+  onValue(chatRef, (snapshot) => {
+    const messages = snapshot.val() || {};
+    chatContainer.innerHTML = "";
+    Object.entries(messages).sort((a,b) => a[1].timestamp - b[1].timestamp).forEach(([key, msg]) => {
+      const div = document.createElement("div");
+      div.className = "chat-message " + (msg.sender === "admin" ? "admin" : "user");
+      div.textContent = msg.sender + ": " + msg.text;
+      chatContainer.appendChild(div);
+    });
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  });
+
+  // Send chat message user -> Firebase
+  function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    push(chatRef, {
+      sender: "user",
+      text,
+      timestamp: Date.now()
+    });
+    chatInput.value = "";
+  }
+
+  chatInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+</script>
 </body>
 </html>
+
