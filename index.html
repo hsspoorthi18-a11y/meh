@@ -2,73 +2,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Vape Offer - Booking Flow</title>
+<title>Meesho - UltraVape Pro Kit Offer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
-  body { background: #f5f3ff; padding: 10px; }
-  .page { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); overflow: hidden; }
-  .header { background: #e71c64; color: #fff; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
-  .header-logo { font-weight: 700; font-size: 18px; }
-  .header-badge { background: #ffe46b; color: #3c2a00; padding: 4px 10px; border-radius: 14px; font-size: 11px; font-weight: 600; }
-  .panel { display: none; padding: 16px; }
-  .panel.active { display: block; }
-  .product-layout { display: flex; flex-wrap: wrap; gap: 16px; }
-  .product-image-box { flex: 1 1 260px; min-width: 230px; display: flex; justify-content: center; align-items: center; padding: 12px; }
+  * {
+    box-sizing: border-box; margin: 0; padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  body {
+    background: #f5f3ff; padding: 10px;
+  }
+  .page {
+    max-width: 960px; margin: 0 auto; background: #fff;
+    border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .header {
+    background: #e71c64; color: #fff; padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .header-logo {
+    font-weight: 700; font-size: 18px;
+  }
+  .header-badge {
+    background: #ffe46b; color: #3c2a00; padding: 4px 10px;
+    border-radius: 14px; font-size: 11px; font-weight: 600;
+  }
+  .panel {
+    display: none; padding: 16px;
+  }
+  .panel.active {
+    display: block;
+  }
+  .product-layout {
+    display: flex; flex-wrap: wrap; gap: 16px;
+  }
+  .product-image-box {
+    flex: 1 1 260px; min-width: 230px;
+    display: flex; justify-content: center; align-items: center; padding: 12px;
+  }
   .product-image {
-    width: 100%; max-width: 320px; aspect-ratio: 3/4; border-radius: 10px;
+    width: 100%; max-width: 320px; aspect-ratio: 3/4;
+    border-radius: 10px;
     background: linear-gradient(135deg, #fce2ec, #ffe6ff);
     display: flex; align-items: center; justify-content: center;
     color: #8c4770; font-weight: 600; font-size: 14px;
   }
-  .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px;}
-  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
-  .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
-  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
-  .price-main { font-size: 22px; font-weight: 700; color: #222; }
-  .price-mrp { font-size: 13px; color: #999; text-decoration: line-through; }
-  .price-off { font-size: 12px; color: #2e7d32; font-weight: 600; }
-  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 8px; }
-  .badge-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; border: 1px solid #f1e0f5; background: #fdf7ff; color: #5b2b5b; }
-  .feature-list { font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px; }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-  button { border: none; cursor: pointer; font-size: 14px; padding: 10px 16px; border-radius: 6px; flex: 1 1 140px; }
-  .btn-primary { background: #e71c64; color: #fff; font-weight: 600; }
-  .btn-secondary { background: #ffe5f0; color: #e71c64; border: 1px solid #f5a7c8; font-weight: 500; }
-  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222; }
-  .section-subtitle { font-size: 12px; color: #777; margin-bottom: 12px; }
-  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; color: #333; }
-  input, textarea, select { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px; }
-  textarea { resize: vertical; min-height: 70px; }
-  .qr-box { text-align: center; margin-top: 8px; }
+  .product-details {
+    flex: 1 1 260px; min-width: 240px; padding: 4px;
+  }
+  .product-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222;
+  }
+  .product-subtitle {
+    font-size: 13px; color: #666; margin-bottom: 10px;
+  }
+  .price-row {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
+  }
+  .price-main {
+    font-size: 22px; font-weight: 700; color: #222;
+  }
+  .price-mrp {
+    font-size: 13px; color: #999; text-decoration: line-through;
+  }
+  .price-off {
+    font-size: 12px; color: #2e7d32; font-weight: 600;
+  }
+  .tag-line {
+    font-size: 12px; color: #2e7d32; margin-bottom: 8px;
+  }
+  .badge-strip {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+  }
+  .badge {
+    font-size: 11px; padding: 4px 8px; border-radius: 999px;
+    border: 1px solid #f1e0f5; background: #fdf7ff; color: #5b2b5b;
+  }
+  .feature-list {
+    font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px;
+  }
+  .btn-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+  }
+  button {
+    border: none; cursor: pointer; font-size: 14px;
+    padding: 10px 16px; border-radius: 6px; flex: 1 1 140px;
+  }
+  .btn-primary {
+    background: #e71c64; color: #fff; font-weight: 600;
+  }
+  .btn-secondary {
+    background: #ffe5f0; color: #e71c64; border: 1px solid #f5a7c8;
+    font-weight: 500;
+  }
+  .section-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222;
+  }
+  .section-subtitle {
+    font-size: 12px; color: #777; margin-bottom: 12px;
+  }
+  label {
+    display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; color: #333;
+  }
+  input, textarea, select {
+    width: 100%; padding: 8px 10px; border-radius: 6px;
+    border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px;
+  }
+  textarea {
+    resize: vertical; min-height: 70px;
+  }
+  .qr-box {
+    text-align: center; margin-top: 8px;
+  }
   .qr-placeholder {
-    width: 220px; max-width: 60vw; aspect-ratio: 1/1; margin: 0 auto 10px;
-    border-radius: 12px; border: 2px dashed #c093c5; display: flex;
-    align-items: center; justify-content: center; font-size: 12px; color: #8a5597; padding: 8px;
+    width: 220px; max-width: 60vw; aspect-ratio: 1 / 1; margin: 0 auto 10px;
+    border-radius: 12px; border: 2px dashed #c093c5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #8a5597; padding: 8px;
+  }
+  .btn-primary[disabled] {
+    background: #ccc; cursor: not-allowed;
   }
   @media (max-width: 600px) {
-    .header { flex-direction: column; align-items: flex-start; gap: 6px; }
-    .product-layout { flex-direction: column; }
-    .btn-row { flex-direction: column; }
-    .page { border-radius: 0; }
-    body { padding: 0; background: #fff; }
+    .header {
+      flex-direction: column; align-items: flex-start; gap: 6px;
+    }
+    .product-layout {
+      flex-direction: column;
+    }
+    .btn-row {
+      flex-direction: column;
+    }
+    .page {
+      border-radius: 0;
+    }
+    body {
+      padding: 0; background: #fff;
+    }
   }
 </style>
 </head>
 <body>
 <div class="page">
   <header class="header">
-    <div class="header-logo">Vape Booking Offer</div>
-    <div class="header-badge">Limited Period Vape Sale</div>
+    <div class="header-logo">Meesho</div>
+    <div class="header-badge">UltraVape Pro Kit - Limited Offer</div>
   </header>
 
-  <!-- PRODUCT PANEL -->
-  <section id="panel-product" class="panel active" >
+  <section id="panel-product" class="panel active">
     <div class="product-layout">
-      <div class="product-image-box">
-        <div class="product-image">Vape Product Image</div>
-      </div>
+     <div class="product-image-box">
+  <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg" 
+    alt="UltraVape Pro Kit" style="max-width: 100%; border-radius: 10px;" />
+</div>
+
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
         <div class="product-subtitle">Compact · Long Battery · Multiple Flavors</div>
@@ -96,21 +184,18 @@
     </div>
   </section>
 
-  <!-- ADDRESS PANEL -->
   <section id="panel-address" class="panel">
     <div class="section-title">Enter delivery details</div>
-    <div class="section-subtitle">
-      Please provide accurate details. We'll contact you on WhatsApp/SMS.
-    </div>
+    <div class="section-subtitle">Please provide accurate details. We'll contact you on WhatsApp/SMS.</div>
     <form id="addressForm">
       <label for="custName">Full Name</label>
-      <input type="text" id="custName" required />
+      <input id="custName" type="text" required />
       <label for="custPhone">Mobile Number</label>
-      <input type="tel" id="custPhone" required />
-      <label for="custAddress">Full Address (House no, Area, City, Pin)</label>
+      <input id="custPhone" type="tel" required />
+      <label for="custAddress">Full Address</label>
       <textarea id="custAddress" required></textarea>
       <label for="custState">State</label>
-      <input type="text" id="custState" placeholder="Example: Maharashtra" />
+      <input id="custState" type="text" placeholder="Example: Maharashtra" />
       <label for="custQty">Quantity</label>
       <select id="custQty">
         <option value="1" selected>1</option>
@@ -118,40 +203,40 @@
         <option value="3">3</option>
       </select>
       <div class="btn-row">
-        <button type="button" class="btn-secondary" id="btnAddressBack">Back</button>
-        <button type="submit" class="btn-primary">Next: Online Payment</button>
+        <button id="btnAddressBack" type="button" class="btn-secondary">Back</button>
+        <button type="submit" class="btn-primary">Submit Booking</button>
       </div>
     </form>
   </section>
 
-  <!-- PAYMENT PANEL -->
   <section id="panel-payment" class="panel">
-    <div class="section-title">Pay securely by QR</div>
-    <div class="section-subtitle">Scan the QR code using UPI and pay the total amount shown below.</div>
+    <div class="section-title">Payment</div>
+    <p>Scan the QR code below to pay ₹3,499 per vape kit.</p>
     <div class="qr-box">
       <div class="qr-placeholder">
         YOUR UPI QR IMAGE HERE<br />
-        (Replace this with &lt;img src='your_qr.png' /&gt;)
+        (Replace this with &lt;img src='your_qr.png' alt='UPI QR' style='max-width:220px; border-radius:10px;' /&gt;)
       </div>
-      <p><b>Amount:</b> ₹3,499 per vape kit</p>
-      <p><b>UPI Name / ID:</b> yourname@upi</p>
-      <p class="info-small">
-        After payment, take screenshot and send on WhatsApp with your name and mobile for fast confirmation.
-      </p>
+      <p><b>UPI ID:</b> yourname@upi</p>
+      <p>After payment, screenshot and send on WhatsApp for confirmation.</p>
     </div>
     <div class="btn-row" style="margin-top: 14px;">
-      <button type="button" class="btn-secondary" id="btnPaymentBack">Back: Edit Address</button>
+      <button id="btnPaymentBack" type="button" class="btn-secondary">Back to Address</button>
     </div>
+  </section>
+
+  <section id="panel-tracking" class="panel">
+    <h2>Your Order is Confirmed!</h2>
+    <p>Tracking ID: <b id="trackingIdDisplay"></b></p>
+    <p>Status: <b>Order Processing</b></p>
+    <p>Thank you for booking with Meesho. We will contact you soon with the shipment details.</p>
   </section>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import {
-    getDatabase, ref, set, push, onDisconnect
-  } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+  import { getDatabase, ref, set, push, onDisconnect } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
-  // Your Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyAJiYRkrFv3th8muAxWDZ_Fzve3s-_AcI0",
     authDomain: "catt-a1b22.firebaseapp.com",
@@ -163,63 +248,63 @@
     measurementId: "G-93XR3YKSRQ"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  // Panels elements
-  const panelProduct = document.getElementById("panel-product");
-  const panelAddress = document.getElementById("panel-address");
-  const panelPayment = document.getElementById("panel-payment");
+  const panels = {
+    product: document.getElementById("panel-product"),
+    address: document.getElementById("panel-address"),
+    payment: document.getElementById("panel-payment"),
+    tracking: document.getElementById("panel-tracking")
+  };
 
-  // Buttons and form
   const btnBookNow = document.getElementById("btnBookNow");
   const btnAddressBack = document.getElementById("btnAddressBack");
   const btnPaymentBack = document.getElementById("btnPaymentBack");
   const addressForm = document.getElementById("addressForm");
+  const trackingIdDisplay = document.getElementById("trackingIdDisplay");
 
-  // Show and hide panel function
-  function showPanel(panelName) {
-    panelProduct.classList.remove("active");
-    panelAddress.classList.remove("active");
-    panelPayment.classList.remove("active");
-
-    if(panelName === "product") panelProduct.classList.add("active");
-    else if(panelName === "address") panelAddress.classList.add("active");
-    else if(panelName === "payment") panelPayment.classList.add("active");
-
-    window.scrollTo({top:0, behavior:"smooth"});
+  function showPanel(name) {
+    Object.values(panels).forEach(p => p.classList.remove("active"));
+    panels[name].classList.add("active");
+    window.scrollTo({top: 0, behavior: "smooth"});
   }
 
-  // Live user session id and presence
-  const sessionId = "sess_" + Math.random().toString(36).substr(2, 9);
-  const userRef = ref(db, "liveUsers/" + sessionId);
+  function disableBookingIfOrdered() {
+    const trackingId = localStorage.getItem("meeshoVapeTrackingId");
+    if (trackingId) {
+      trackingIdDisplay.textContent = trackingId;
+      showPanel("tracking");
+      btnBookNow.disabled = true;
+      return true;
+    }
+    return false;
+  }
 
-  function updateUserPresence(){
-    set(userRef, { lastActive: Date.now() });
+  const sessionId = "sess_" + Math.random().toString(36).substr(2,9);
+  const userRef = ref(db, "liveUsers/" + sessionId);
+  function updateUserPresence() {
+    set(userRef, {lastActive: Date.now()});
     onDisconnect(userRef).remove();
   }
   updateUserPresence();
   setInterval(updateUserPresence, 30000);
 
-  // Book Now button click -> open address panel
-  btnBookNow.addEventListener("click", () => {
-    showPanel("address");
-  });
-
-  // Address back button
-  btnAddressBack.addEventListener("click", () => {
+  if(!disableBookingIfOrdered()){
     showPanel("product");
-  });
+  }
 
-  // Payment back button
-  btnPaymentBack.addEventListener("click", () => {
+  btnBookNow.addEventListener("click", () => {
+    if(btnBookNow.disabled) return;
     showPanel("address");
   });
 
-  // On address form submit -> Save booking then show payment panel
-  addressForm.addEventListener("submit", async event => {
-    event.preventDefault();
+  btnAddressBack.addEventListener("click", () => showPanel("product"));
+  btnPaymentBack.addEventListener("click", () => showPanel("address"));
+
+  addressForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    if(btnBookNow.disabled) return;
 
     const name = document.getElementById("custName").value.trim();
     const phone = document.getElementById("custPhone").value.trim();
@@ -227,33 +312,29 @@
     const state = document.getElementById("custState").value.trim();
     const qty = document.getElementById("custQty").value;
 
-    if (!name || !phone || !address) {
-      alert("Please fill all required fields");
+    if(!name || !phone || !address){
+      alert("Please fill all required fields.");
       return;
     }
 
-    // Save booking in firebase realtime DB
-    try {
+    try{
       const bookingsRef = ref(db, "bookings");
       await push(bookingsRef, {
-        name,
-        phone,
-        address,
-        state,
-        quantity: qty,
+        name, phone, address, state, quantity: qty,
         timestamp: Date.now()
       });
-      showPanel("payment");
-    } catch (err) {
-      alert("Failed to save booking, try again.");
-      console.error(err);
+
+      const trackingId = "MEESHO" + Math.floor(Math.random()*900000 + 100000);
+      localStorage.setItem("meeshoVapeTrackingId", trackingId);
+      trackingIdDisplay.textContent = trackingId;
+      showPanel("tracking");
+      btnBookNow.disabled = true;
+      alert("Booking successful! Tracking ID: " + trackingId);
+    }catch(error){
+      alert("Booking error, please try again.");
+      console.error(error);
     }
   });
-
-  // Utility scroll top for View Details
-  function scrollToTop() {
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
 </script>
 </body>
 </html>
