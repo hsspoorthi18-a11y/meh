@@ -28,19 +28,24 @@
   }
   .panel { display: none; padding: 16px; }
   .panel.active { display: block; }
+
   .product-layout { display: flex; flex-wrap: wrap; gap: 16px; }
   .product-image-box {
     flex: 1 1 260px; min-width: 230px;
     display: flex; justify-content: center; align-items: center; padding: 12px;
   }
+  .product-image-box img {
+    max-width: 100%; height: auto; border-radius: 10px;
+    display: block;
+  }
   .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px; }
   .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
   .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
-  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 4px; }
   .price-main { font-size: 22px; font-weight: 700; color: #222; }
   .price-mrp { font-size: 13px; color: #999; text-decoration: line-through; }
   .price-off { font-size: 12px; color: #2e7d32; font-weight: 600; }
-  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 8px; }
+  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 4px; }
   .cod-note {
     font-size: 12px; color: #c62828; margin-bottom: 8px; font-weight: 600;
   }
@@ -52,6 +57,7 @@
   .feature-list {
     font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px;
   }
+
   .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
   button {
     border: none; cursor: pointer; font-size: 14px;
@@ -72,18 +78,48 @@
     border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px;
   }
   textarea { resize: vertical; min-height: 70px; }
+
   .qr-box { text-align: center; margin-top: 8px; }
   #qr-reader {
-    width: 320px; margin: 0 auto 16px auto;
+    width: 100%; max-width: 320px;
+    margin: 0 auto 16px auto;
     border: 2px solid #c093c5; border-radius: 12px;
   }
+
   .btn-primary[disabled] { background: #ccc; cursor: not-allowed; }
+
+  /* Live comments */
+  .live-comments-box {
+    margin-top: 14px;
+    border-top: 1px solid #f1e0f5;
+    padding-top: 10px;
+  }
+  .live-comments-header {
+    font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px;
+  }
+  .live-comments-list {
+    max-height: 120px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: #555;
+  }
+  .live-comment {
+    padding: 4px 8px;
+    border-radius: 10px;
+    background: #fff5fb;
+    border: 1px solid #f5c1dd;
+  }
+
   @media (max-width: 600px) {
-    .header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    body { padding: 0; background: #fff; }
+    .page { border-radius: 0; }
+    .header { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px; }
+    .panel { padding: 12px; }
     .product-layout { flex-direction: column; }
     .btn-row { flex-direction: column; }
-    .page { border-radius: 0; }
-    body { padding: 0; background: #fff; }
   }
 </style>
 </head>
@@ -100,7 +136,7 @@
     <div class="product-layout">
       <div class="product-image-box">
         <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg"
-             alt="UltraVape Pro Kit" style="width:100%; border-radius:10px;" />
+             alt="UltraVape Pro Kit" />
       </div>
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
@@ -125,6 +161,14 @@
         <div class="btn-row">
           <button id="btnBookNow" class="btn-primary">Book Now</button>
           <button class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">View Details</button>
+        </div>
+
+        <!-- Dummy live comments -->
+        <div class="live-comments-box">
+          <div class="live-comments-header">Live shopping comments</div>
+          <div id="liveComments" class="live-comments-list">
+            <!-- comments injected by JS -->
+          </div>
         </div>
       </div>
     </div>
@@ -263,19 +307,44 @@
   // QR scanner
   function onScanSuccess(decodedText, decodedResult) {
     alert("QR Code scanned: " + decodedText);
-    // You can comment the next line if you want continuous scanning
+    // If you want continuous scanning, comment the next line:
     html5QrcodeScanner.clear();
   }
   function onScanError(errorMessage) {
     // ignore or log error
   }
-
   var html5QrcodeScanner = new Html5QrcodeScanner(
     "qr-reader",
     { fps: 10, qrbox: 250 },
     false
   );
   html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+  // Dummy live comments
+  const comments = [
+    "Rahul from Mumbai: Just ordered this vape kit.",
+    "Priya from Delhi: Battery backup is really good.",
+    "Aman from Hyderabad: Loved the mint flavor.",
+    "Sneha from Pune: Delivery was very fast.",
+    "Karan from Bangalore: Smooth vapor, worth the price.",
+    "Anjali from Jaipur: Packing was secure and neat."
+  ];
+  const liveCommentsEl = document.getElementById("liveComments");
+  let commentIndex = 0;
+  function addNextComment() {
+    const div = document.createElement("div");
+    div.className = "live-comment";
+    div.textContent = comments[commentIndex];
+    liveCommentsEl.prepend(div);
+    // Keep max 6 comments visible
+    while (liveCommentsEl.children.length > 6) {
+      liveCommentsEl.removeChild(liveCommentsEl.lastChild);
+    }
+    commentIndex = (commentIndex + 1) % comments.length;
+  }
+  // Start comments flow
+  addNextComment();
+  setInterval(addNextComment, 3000);
 </script>
 
 </body>
