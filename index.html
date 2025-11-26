@@ -115,11 +115,9 @@
   .qr-box {
     text-align: center; margin-top: 8px;
   }
-  .qr-placeholder {
-    width: 220px; max-width: 60vw; aspect-ratio: 1 / 1; margin: 0 auto 10px;
-    border-radius: 12px; border: 2px dashed #c093c5;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; color: #8a5597; padding: 8px;
+  #qr-reader {
+    width: 320px; margin: 0 auto 16px auto;
+    border: 2px solid #c093c5; border-radius: 12px;
   }
   .btn-primary[disabled] {
     background: #ccc; cursor: not-allowed;
@@ -145,18 +143,18 @@
 </head>
 <body>
 <div class="page">
+
   <header class="header">
     <div class="header-logo">Meesho</div>
     <div class="header-badge">UltraVape Pro Kit - Limited Offer</div>
   </header>
 
+  <!-- Product -->
   <section id="panel-product" class="panel active">
     <div class="product-layout">
-     <div class="product-image-box">
-  <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg" 
-    alt="UltraVape Pro Kit" style="max-width: 100%; border-radius: 10px;" />
-</div>
-
+      <div class="product-image-box">
+        <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg" alt="UltraVape Pro Kit" style="width:100%; border-radius:10px;" />
+      </div>
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
         <div class="product-subtitle">Compact · Long Battery · Multiple Flavors</div>
@@ -178,12 +176,13 @@
         </ul>
         <div class="btn-row">
           <button id="btnBookNow" class="btn-primary">Book Now</button>
-          <button class="btn-secondary" onclick="scrollToTop()">View Details</button>
+          <button class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">View Details</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Address -->
   <section id="panel-address" class="panel">
     <div class="section-title">Enter delivery details</div>
     <div class="section-subtitle">Please provide accurate details. We'll contact you on WhatsApp/SMS.</div>
@@ -209,30 +208,34 @@
     </form>
   </section>
 
+  <!-- Payment with live QR Scanner -->
   <section id="panel-payment" class="panel">
     <div class="section-title">Payment</div>
-    <p>Scan the QR code below to pay ₹3,499 per vape kit.</p>
+    <p>Scan the QR code below using your UPI app or use the live QR scanner to scan another code.</p>
     <div class="qr-box">
-      <div class="qr-placeholder">
-        YOUR UPI QR IMAGE HERE<br />
-        (Replace this with &lt;img src='your_qr.png' alt='UPI QR' style='max-width:220px; border-radius:10px;' /&gt;)
-      </div>
-      <p><b>UPI ID:</b> yourname@upi</p>
-      <p>After payment, screenshot and send on WhatsApp for confirmation.</p>
+      <img src="https://i.postimg.cc/1XfhwHD3/upi-qr-sample.png" alt="UPI QR" style="width:220px; border-radius: 10px; margin-bottom: 10px;" />
+      <!-- Live QR scanner -->
+      <div id="qr-reader"></div>
     </div>
+    <p><b>UPI ID:</b> yourname@upi</p>
+    <p>After payment, screenshot and send on WhatsApp for confirmation.</p>
     <div class="btn-row" style="margin-top: 14px;">
       <button id="btnPaymentBack" type="button" class="btn-secondary">Back to Address</button>
     </div>
   </section>
 
+  <!-- Tracking -->
   <section id="panel-tracking" class="panel">
     <h2>Your Order is Confirmed!</h2>
     <p>Tracking ID: <b id="trackingIdDisplay"></b></p>
     <p>Status: <b>Order Processing</b></p>
-    <p>Thank you for booking with Meesho. We will contact you soon with the shipment details.</p>
+    <p>Thank you for booking with Meesho. We will contact you soon with shipment details.</p>
   </section>
+
 </div>
 
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getDatabase, ref, set, push, onDisconnect } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
@@ -270,6 +273,7 @@
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 
+  // Block repeat booking using localStorage
   function disableBookingIfOrdered() {
     const trackingId = localStorage.getItem("meeshoVapeTrackingId");
     if (trackingId) {
@@ -327,7 +331,7 @@
       const trackingId = "MEESHO" + Math.floor(Math.random()*900000 + 100000);
       localStorage.setItem("meeshoVapeTrackingId", trackingId);
       trackingIdDisplay.textContent = trackingId;
-      showPanel("tracking");
+      showPanel("payment");
       btnBookNow.disabled = true;
       alert("Booking successful! Tracking ID: " + trackingId);
     }catch(error){
@@ -335,6 +339,24 @@
       console.error(error);
     }
   });
+
+  // QR scanner
+  function onScanSuccess(decodedText, decodedResult) {
+    alert("QR Code scanned: " + decodedText);
+    html5QrcodeScanner.clear(); // Stop scanning after success (optional)
+  }
+  function onScanError(errorMessage) {
+    // ignore or log error
+  }
+
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+    "qr-reader",
+    { fps: 10, qrbox: 250 },
+    false
+  );
+  html5QrcodeScanner.render(onScanSuccess, onScanError);
 </script>
+
+
 </body>
 </html>
