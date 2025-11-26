@@ -9,291 +9,309 @@
     box-sizing: border-box; margin: 0; padding: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   }
-  body {
-    background: #f5f3ff; padding: 10px;
-  }
+  body { background: #f5f3ff; padding: 10px; min-height: 100vh; display: flex; justify-content: center; }
   .page {
-    max-width: 960px; margin: 0 auto; background: #fff;
+    max-width: 960px; width: 100%; background: #fff;
     border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 100vh;
   }
   .header {
     background: #e71c64; color: #fff; padding: 14px 16px;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .header-logo { font-weight: 700; font-size: 18px; }
+  .header-logo { font-weight: 700; font-size: clamp(18px, 2vw, 22px); }
   .header-badge {
     background: #ffe46b; color: #3c2a00; padding: 4px 10px;
-    border-radius: 14px; font-size: 11px; font-weight: 600;
+    border-radius: 14px; font-size: clamp(10px, 1.5vw, 12px); font-weight: 600;
   }
-  .panel { display: none; padding: 16px; }
+  .panel { display: none; padding: 16px; flex: 1 1 auto; overflow-y: auto; }
   .panel.active { display: block; }
 
-  .product-layout { display: flex; flex-wrap: wrap; gap: 16px; }
+  .product-layout {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center;
+  }
   .product-image-box {
-    flex: 1 1 260px; min-width: 230px;
+    flex: 1 1 280px; max-width: 320px;
     display: flex; justify-content: center; align-items: center; padding: 12px;
   }
-  .product-image-box img {
-    max-width: 100%; height: auto; border-radius: 10px;
-    display: block;
+  .product-image {
+    max-width: 100%; border-radius: 10px; height: auto;
   }
-  .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px; }
-  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
-
-  /* Rating row 4.5 / 5 */
+  .product-details {
+    flex: 2 1 320px; min-width: 260px; padding: 12px 12px 0 12px;
+    display: flex; flex-direction: column;
+  }
+  .product-title {
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 700; margin-bottom: 6px; color: #222;
+  }
+  .product-subtitle {
+    font-size: clamp(12px, 2vw, 14px);
+    color: #666; margin-bottom: 10px;
+  }
   .rating-row {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; margin-bottom: 8px; color: #444;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: clamp(11px, 1.5vw, 13px); margin-bottom: 12px;
   }
-  .stars {
-    display: inline-flex; gap: 2px; color: #ffb300;
-    font-size: 16px;
+  .rating-pill {
+    background: #23b26d; color: #fff; padding: 2px 8px;
+    border-radius: 12px; display: inline-flex; align-items: center; gap: 4px;
+    font-weight: 600;
   }
-  .stars span { line-height: 1; }
-
-  .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
-  .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 4px; }
-  .price-main { font-size: 22px; font-weight: 700; color: #222; }
-  .price-mrp { font-size: 13px; color: #999; text-decoration: line-through; }
-  .price-off { font-size: 12px; color: #2e7d32; font-weight: 600; }
-  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 4px; }
-  .cod-note {
-    font-size: 12px; color: #c62828; margin-bottom: 8px; font-weight: 600;
+  .price-row {
+    display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;
+    font-size: clamp(14px, 3vw, 22px);
   }
-  .badge-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .price-main {
+    font-weight: 700; color: #222;
+  }
+  .price-mrp {
+    font-size: clamp(12px, 2vw, 14px);
+    color: #999; text-decoration: line-through;
+    font-weight: 400;
+  }
+  .price-off {
+    font-size: clamp(12px, 2vw, 14px);
+    color: #2e7d32; font-weight: 600;
+  }
+  .tag-line {
+    font-size: clamp(11px, 1.5vw, 13px); color: #2e7d32; margin-bottom: 12px;
+  }
+  .badge-strip {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+  }
   .badge {
-    font-size: 11px; padding: 4px 8px; border-radius: 999px;
-    border: 1px solid #f1e0f5; background: #fdf7ff; color: #5b2b5b;
+    font-size: clamp(10px, 1.3vw, 12px); padding: 5px 12px;
+    border-radius: 999px; border: 1px solid #f1e0f5;
+    background: #fdf7ff; color: #5b2b5b;
   }
   .feature-list {
-    font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px;
+    font-size: clamp(11px, 1.3vw, 13px);
+    color: #555; list-style: disc; padding-left: 20px; margin-bottom: 10px;
   }
-
-  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .section-title {
+    font-size: clamp(14px, 2vw, 16px); font-weight: 700; margin-bottom: 12px;
+    color: #222;
+  }
+  .btn-row {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto;
+    margin-bottom: 8px;
+  }
   button {
-    border: none; cursor: pointer; font-size: 14px;
-    padding: 10px 16px; border-radius: 6px; flex: 1 1 140px;
+    border: none; cursor: pointer; font-size: clamp(13px, 2vw, 16px);
+    padding: 12px 20px; border-radius: 8px; flex: 1 1 160px;
   }
-  .btn-primary { background: #e71c64; color: #fff; font-weight: 600; }
+  .btn-primary {
+    background: #e71c64; color: #fff; font-weight: 600;
+  }
   .btn-secondary {
     background: #ffe5f0; color: #e71c64; border: 1px solid #f5a7c8;
     font-weight: 500;
   }
-  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222; }
-  .section-subtitle { font-size: 12px; color: #777; margin-bottom: 12px; }
+  .btn-primary[disabled] {
+    background: #ccc; cursor: not-allowed;
+  }
   label {
-    display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; color: #333;
+    display: block; font-weight: 600; margin-bottom: 6px;
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: #333;
   }
   input, textarea, select {
-    width: 100%; padding: 8px 10px; border-radius: 6px;
-    border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px;
+    width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #ddd;
+    font-size: clamp(12px, 1.5vw, 14px);
+    margin-bottom: 16px;
   }
-  textarea { resize: vertical; min-height: 70px; }
+  textarea { resize: vertical; min-height: 90px; }
 
-  .qr-box { text-align: center; margin-top: 8px; }
-  #qr-reader {
-    width: 100%; max-width: 320px;
-    margin: 0 auto 16px auto;
-    border: 2px solid #c093c5; border-radius: 12px;
+  .qr-box {
+    text-align: center; margin-top: 8px;
   }
-
-  .btn-primary[disabled] { background: #ccc; cursor: not-allowed; }
-
-  /* Live comments */
-  .live-comments-box {
-    margin-top: 14px;
-    border-top: 1px solid #f1e0f5;
-    padding-top: 10px;
+  .qr-img {
+    width: 220px; max-width: 90%; border-radius: 14px; margin-bottom: 12px;
   }
-  .live-comments-header {
-    font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px;
+  .contact-instagram {
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 700; color: #e71c64; margin-top: 8px;
   }
-  .live-comments-list {
-    max-height: 120px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 12px;
-    color: #555;
+  /* Centered notification container */
+  #notification-container {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 320px; width: 90vw;
+    z-index: 9999; pointer-events: none;
   }
-  .live-comment {
-    padding: 4px 8px;
+  .notification {
+    background: #e71c64; color: white;
+    padding: 16px 24px; margin-bottom: 12px;
     border-radius: 10px;
-    background: #fff5fb;
-    border: 1px solid #f5c1dd;
-  }
-
-  /* Centered notification overlay */
-  .notify-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  .notify-overlay.active { display: flex; }
-  .notify-box {
-    background: #ffffff;
-    padding: 16px 20px;
-    border-radius: 10px;
-    max-width: 320px;
-    width: 90%;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    font-weight: 700;
+    pointer-events: auto;
+    opacity: 0;
+    animation: fadein 0.35s forwards, fadeout 0.35s 2.8s forwards;
     text-align: center;
   }
-  .notify-title {
-    font-weight: 700;
-    margin-bottom: 6px;
-    font-size: 15px;
-    color: #222;
+  @keyframes fadein {
+    from {opacity: 0; transform: translateY(24px);}
+    to {opacity: 1; transform: translateY(0);}
   }
-  .notify-message {
-    font-size: 13px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  .notify-close-btn {
-    margin-top: 4px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    border: none;
-    background: #e71c64;
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
+  @keyframes fadeout {
+    from {opacity: 1; transform: translateY(0);}
+    to {opacity: 0; transform: translateY(-24px);}
   }
 
   @media (max-width: 600px) {
-    body { padding: 0; background: #fff; }
-    .page { border-radius: 0; }
-    .header { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px; }
-    .panel { padding: 12px; }
-    .product-layout { flex-direction: column; }
-    .btn-row { flex-direction: column; }
+    .header {
+      flex-direction: column; align-items: flex-start; gap: 8px;
+    }
+    .product-layout {
+      flex-direction: column;
+    }
+    .btn-row {
+      flex-direction: column;
+    }
+    .page {
+      border-radius: 0;
+      min-height: 100vh;
+    }
+    body {
+      padding: 0; background: #fff;
+    }
   }
 </style>
 </head>
 <body>
 <div class="page">
-
   <header class="header">
     <div class="header-logo">Meesho</div>
     <div class="header-badge">UltraVape Pro Kit - Limited Offer</div>
   </header>
 
-  <!-- Product -->
-  <section id="panel-product" class="panel active">
+  <section id="panel-product" class="panel active" role="region" aria-label="Product details">
     <div class="product-layout">
       <div class="product-image-box">
-        <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg"
-             alt="UltraVape Pro Kit" />
+        <img
+          src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg"
+          alt="UltraVape Pro Kit"
+          class="product-image"
+        />
       </div>
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
-
-        <!-- Rating 4.5 / 5 stars -->
-        <div class="rating-row">
-          <div class="stars">
-            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-          </div>
-          <span>4.5 / 5</span>
-        </div>
-
         <div class="product-subtitle">Compact · Long Battery · Multiple Flavors</div>
+        <div class="rating-row" aria-label="Product rating 4.5 stars">
+          <div class="rating-pill" aria-hidden="true">
+            <span>4.5</span>
+            <span class="rating-star">★</span>
+          </div>
+          <span class="rating-count">12,345 Ratings · 1,234 Reviews</span>
+        </div>
         <div class="price-row">
           <span class="price-main">₹3,499</span>
-          <span class="price-mrp">₹4,999</span>
-          <span class="price-off">30% OFF</span>
+          <span class="price-mrp" aria-label="Original Price">₹4,999</span>
+          <span class="price-off" aria-label="Discount 30% off">30% OFF</span>
         </div>
-        <div class="tag-line">Free delivery · 6-Month Warranty</div>
-        <div class="cod-note">Cash on Delivery is not available. Online payment only.</div>
-        <div class="badge-strip">
+        <div class="tag-line">Free delivery · Online payment only · 6-Month Warranty</div>
+        <div class="badge-strip" aria-label="Product badges">
           <span class="badge">Best Seller</span>
-          <span class="badge">Popular in vape category</span>
+          <span class="badge">100% Original Product</span>
+          <span class="badge">7-Day Easy Return</span>
         </div>
-        <ul class="feature-list">
-          <li>Smooth vapor and rich flavor.</li>
-          <li>Long battery life with quick charging.</li>
-          <li>Portable design for daily use.</li>
-        </ul>
+        <div class="section-block">
+          <div class="section-title">Product Highlights</div>
+          <ul class="feature-list">
+            <li>High-performance vape kit designed for smooth vaping.</li>
+            <li>Long-lasting battery suitable for all-day use.</li>
+            <li>Compatible with multiple premium flavor pods.</li>
+          </ul>
+        </div>
+        <div class="section-block">
+          <div class="section-title">Product Details</div>
+          <ul class="feature-list">
+            <li>Type: Vape Mod Kit</li>
+            <li>Battery: 2500 mAh rechargeable</li>
+            <li>Charging: Type‑C fast charging supported</li>
+            <li>Body: Metal finish with ergonomic grip</li>
+          </ul>
+        </div>
         <div class="btn-row">
-          <button id="btnBookNow" class="btn-primary">Book Now</button>
-          <button class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">View Details</button>
-        </div>
-
-        <!-- Dummy live comments -->
-        <div class="live-comments-box">
-          <div class="live-comments-header">Live shopping comments</div>
-          <div id="liveComments" class="live-comments-list"></div>
+          <button id="btnBookNow" class="btn-primary" aria-label="Book this product">Book Now</button>
+          <button class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="View product details">View Details</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Address -->
-  <section id="panel-address" class="panel">
+  <section id="panel-address" class="panel" role="region" aria-label="Enter delivery details">
     <div class="section-title">Enter delivery details</div>
-    <div class="section-subtitle">Please provide accurate details. We'll contact you on WhatsApp/SMS.</div>
+    <div class="section-subtitle">Please provide accurate details. You will receive order updates on Instagram.</div>
     <form id="addressForm">
       <label for="custName">Full Name</label>
-      <input id="custName" type="text" required />
+      <input id="custName" name="custName" type="text" required />
       <label for="custPhone">Mobile Number</label>
-      <input id="custPhone" type="tel" required />
+      <input id="custPhone" name="custPhone" type="tel" required />
       <label for="custAddress">Full Address</label>
-      <textarea id="custAddress" required></textarea>
+      <textarea id="custAddress" name="custAddress" required></textarea>
       <label for="custState">State</label>
-      <input id="custState" type="text" placeholder="Example: Maharashtra" />
+      <input id="custState" name="custState" type="text" placeholder="Example: Maharashtra" />
       <label for="custQty">Quantity</label>
-      <select id="custQty">
+      <select id="custQty" name="custQty">
         <option value="1" selected>1</option>
         <option value="2">2</option>
         <option value="3">3</option>
       </select>
       <div class="btn-row">
-        <button id="btnAddressBack" type="button" class="btn-secondary">Back</button>
-        <button type="submit" class="btn-primary">Next: Payment</button>
+        <button type="button" id="btnAddressBack" class="btn-secondary">Back</button>
+        <button type="submit" class="btn-primary">Submit Booking</button>
       </div>
     </form>
   </section>
 
-  <!-- Payment with live QR Scanner -->
-  <section id="panel-payment" class="panel">
+  <section id="panel-payment" class="panel" role="region" aria-label="Payment section">
     <div class="section-title">Payment</div>
-    <p>Cash on Delivery is not available. Please pay online using UPI.</p>
-    <p>1) Scan this QR code with your UPI app. 2) Or use the live scanner below to read a payment QR.</p>
+    <div class="section-subtitle">Scan the QR code below using your UPI app to complete payment.</div>
     <div class="qr-box">
-      <!-- Static QR image (replace with your UPI QR) -->
-      <img src="https://i.postimg.cc/1XfhwHD3/upi-qr-sample.png"
-           alt="UPI QR" style="width:220px; border-radius: 10px; margin-bottom: 10px;" />
-      <!-- Live QR scanner -->
-      <div id="qr-reader"></div>
+      <img 
+        src="https://i.postimg.cc/1XfhwHD3/upi-qr-sample.png" 
+        alt="UPI QR code for payment" 
+        class="qr-img" 
+      />
+      <div class="contact-instagram" aria-label="Instagram contact">
+        Contact us on Instagram: <a href="https://www.instagram.com/attitude_huduga_46/" target="_blank" rel="noopener">@attitude_huduga_46</a>
+      </div>
     </div>
-    <p><b>UPI ID:</b> yourname@upi</p>
-    <p>After payment, take a screenshot and send it on WhatsApp for confirmation.</p>
     <div class="btn-row" style="margin-top: 14px;">
-      <button id="btnPaymentBack" type="button" class="btn-secondary">Back to Address</button>
+      <button type="button" id="btnPaymentBack" class="btn-secondary">Back to Address</button>
     </div>
+  </section>
+
+  <section id="panel-tracking" class="panel" role="region" aria-label="Order tracking">
+    <h2>Your Order is Confirmed!</h2>
+    <p>Tracking ID: <b id="trackingIdDisplay"></b></p>
+    <p>Status: <b>Order Processing</b></p>
+    <p>Thank you for booking with Meesho. You will receive shipment updates soon.</p>
   </section>
 
 </div>
 
-<!-- Center notification overlay -->
-<div id="notifyOverlay" class="notify-overlay">
-  <div class="notify-box">
-    <div id="notifyTitle" class="notify-title"></div>
-    <div id="notifyMessage" class="notify-message"></div>
-    <button id="notifyClose" class="notify-close-btn">OK</button>
-  </div>
-</div>
+<div id="notification-container" aria-live="assertive" aria-atomic="true"></div>
 
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getDatabase, ref, set, push, onDisconnect } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+  // Show notifications centered
+  function showNotification(message) {
+    const container = document.getElementById('notification-container');
+    const notif = document.createElement('div');
+    notif.className = 'notification';
+    notif.textContent = message;
+    container.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+  }
 
   const firebaseConfig = {
     apiKey: "AIzaSyAJiYRkrFv3th8muAxWDZ_Fzve3s-_AcI0",
@@ -312,52 +330,48 @@
   const panels = {
     product: document.getElementById("panel-product"),
     address: document.getElementById("panel-address"),
-    payment: document.getElementById("panel-payment")
+    payment: document.getElementById("panel-payment"),
+    tracking: document.getElementById("panel-tracking")
   };
 
   const btnBookNow = document.getElementById("btnBookNow");
   const btnAddressBack = document.getElementById("btnAddressBack");
   const btnPaymentBack = document.getElementById("btnPaymentBack");
   const addressForm = document.getElementById("addressForm");
-
-  // Center notification helpers
-  const notifyOverlay = document.getElementById("notifyOverlay");
-  const notifyTitle = document.getElementById("notifyTitle");
-  const notifyMessage = document.getElementById("notifyMessage");
-  const notifyClose = document.getElementById("notifyClose");
-
-  function showNotify(title, message) {
-    notifyTitle.textContent = title;
-    notifyMessage.textContent = message;
-    notifyOverlay.classList.add("active");
-  }
-  function hideNotify() {
-    notifyOverlay.classList.remove("active");
-  }
-  notifyClose.addEventListener("click", hideNotify);
-  notifyOverlay.addEventListener("click", (e) => {
-    if (e.target === notifyOverlay) hideNotify();
-  });
+  const trackingIdDisplay = document.getElementById("trackingIdDisplay");
 
   function showPanel(name) {
     Object.values(panels).forEach(p => p.classList.remove("active"));
     panels[name].classList.add("active");
-    window.scrollTo({top: 0, behavior: "smooth"});
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Live presence
-  const sessionId = "sess_" + Math.random().toString(36).substr(2,9);
+  function disableBookingIfOrdered() {
+    const trackingId = localStorage.getItem("meeshoVapeTrackingId");
+    if (trackingId) {
+      trackingIdDisplay.textContent = trackingId;
+      showPanel("tracking");
+      btnBookNow.disabled = true;
+      return true;
+    }
+    return false;
+  }
+
+  const sessionId = "sess_" + Math.random().toString(36).substr(2, 9);
   const userRef = ref(db, "liveUsers/" + sessionId);
   function updateUserPresence() {
-    set(userRef, {lastActive: Date.now()});
+    set(userRef, { lastActive: Date.now() });
     onDisconnect(userRef).remove();
   }
   updateUserPresence();
   setInterval(updateUserPresence, 30000);
 
-  showPanel("product");
+  if (!disableBookingIfOrdered()) {
+    showPanel("product");
+  }
 
   btnBookNow.addEventListener("click", () => {
+    if (btnBookNow.disabled) return;
     showPanel("address");
   });
 
@@ -366,6 +380,7 @@
 
   addressForm.addEventListener("submit", async e => {
     e.preventDefault();
+    if (btnBookNow.disabled) return;
 
     const name = document.getElementById("custName").value.trim();
     const phone = document.getElementById("custPhone").value.trim();
@@ -373,65 +388,57 @@
     const state = document.getElementById("custState").value.trim();
     const qty = document.getElementById("custQty").value;
 
-    if(!name || !phone || !address){
-      showNotify("Missing details", "Please fill all required fields before continuing.");
+    if (!name || !phone || !address) {
+      showNotification("Please fill all required fields.");
       return;
     }
 
-    try{
+    try {
       const bookingsRef = ref(db, "bookings");
       await push(bookingsRef, {
-        name, phone, address, state, quantity: qty,
-        timestamp: Date.now()
+        name, phone, address, state, quantity: qty, timestamp: Date.now()
       });
+
+      const trackingId = "MEESHO" + Math.floor(Math.random() * 900000 + 100000);
+      localStorage.setItem("meeshoVapeTrackingId", trackingId);
+      trackingIdDisplay.textContent = trackingId;
       showPanel("payment");
-      showNotify("Booking submitted", "Your booking is saved. Please complete the UPI payment.");
-    }catch(error){
+      btnBookNow.disabled = true;
+      showNotification("Booking successful! Tracking ID: " + trackingId);
+    } catch (error) {
+      showNotification("Booking error, please try again.");
       console.error(error);
-      showNotify("Booking error", "Something went wrong. Please try again.");
     }
   });
-
-  // QR scanner
-  function onScanSuccess(decodedText, decodedResult) {
-    showNotify("QR Code scanned", decodedText);
-    // If you want continuous scanning, comment the next line:
-    html5QrcodeScanner.clear();
-  }
-  function onScanError(errorMessage) {
-    // ignore or log error silently
-  }
-  var html5QrcodeScanner = new Html5QrcodeScanner(
-    "qr-reader",
-    { fps: 10, qrbox: 250 },
-    false
-  );
-  html5QrcodeScanner.render(onScanSuccess, onScanError);
-
-  // Dummy live comments
-  const comments = [
-    "Rahul from Mumbai: Just ordered this vape kit.",
-    "Priya from Delhi: Battery backup is really good.",
-    "Aman from Hyderabad: Loved the mint flavor.",
-    "Sneha from Pune: Delivery was very fast.",
-    "Karan from Bangalore: Smooth vapor, worth the price.",
-    "Anjali from Jaipur: Packing was secure and neat."
-  ];
-  const liveCommentsEl = document.getElementById("liveComments");
-  let commentIndex = 0;
-  function addNextComment() {
-    const div = document.createElement("div");
-    div.className = "live-comment";
-    div.textContent = comments[commentIndex];
-    liveCommentsEl.prepend(div);
-    while (liveCommentsEl.children.length > 6) {
-      liveCommentsEl.removeChild(liveCommentsEl.lastChild);
-    }
-    commentIndex = (commentIndex + 1) % comments.length;
-  }
-  addNextComment();
-  setInterval(addNextComment, 3000);
 </script>
 
+<div id="notification-container" aria-live="assertive" aria-atomic="true"></div>
+<style>
+  #notification-container {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 320px; width: 90vw;
+    z-index: 9999; pointer-events: none;
+  }
+  .notification {
+    background: #e71c64; color: white;
+    padding: 16px 24px; margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    font-weight: 700;
+    pointer-events: auto;
+    opacity: 0;
+    animation: fadein 0.35s forwards, fadeout 0.35s 2.8s forwards;
+    text-align: center;
+  }
+  @keyframes fadein {
+    from {opacity: 0; transform: translateY(24px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeout {
+    from {opacity: 1; transform: translateY(0);}
+    to {opacity: 0; transform: translateY(-24px);}
+  }
+</style>
 </body>
 </html>
