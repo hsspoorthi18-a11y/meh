@@ -21,60 +21,30 @@
     background: #e71c64; color: #fff; padding: 14px 16px;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .header-logo {
-    font-weight: 700; font-size: 18px;
-  }
+  .header-logo { font-weight: 700; font-size: 18px; }
   .header-badge {
     background: #ffe46b; color: #3c2a00; padding: 4px 10px;
     border-radius: 14px; font-size: 11px; font-weight: 600;
   }
-  .panel {
-    display: none; padding: 16px;
-  }
-  .panel.active {
-    display: block;
-  }
-  .product-layout {
-    display: flex; flex-wrap: wrap; gap: 16px;
-  }
+  .panel { display: none; padding: 16px; }
+  .panel.active { display: block; }
+  .product-layout { display: flex; flex-wrap: wrap; gap: 16px; }
   .product-image-box {
     flex: 1 1 260px; min-width: 230px;
     display: flex; justify-content: center; align-items: center; padding: 12px;
   }
-  .product-image {
-    width: 100%; max-width: 320px; aspect-ratio: 3/4;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #fce2ec, #ffe6ff);
-    display: flex; align-items: center; justify-content: center;
-    color: #8c4770; font-weight: 600; font-size: 14px;
+  .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px; }
+  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
+  .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
+  .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .price-main { font-size: 22px; font-weight: 700; color: #222; }
+  .price-mrp { font-size: 13px; color: #999; text-decoration: line-through; }
+  .price-off { font-size: 12px; color: #2e7d32; font-weight: 600; }
+  .tag-line { font-size: 12px; color: #2e7d32; margin-bottom: 8px; }
+  .cod-note {
+    font-size: 12px; color: #c62828; margin-bottom: 8px; font-weight: 600;
   }
-  .product-details {
-    flex: 1 1 260px; min-width: 240px; padding: 4px;
-  }
-  .product-title {
-    font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222;
-  }
-  .product-subtitle {
-    font-size: 13px; color: #666; margin-bottom: 10px;
-  }
-  .price-row {
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
-  }
-  .price-main {
-    font-size: 22px; font-weight: 700; color: #222;
-  }
-  .price-mrp {
-    font-size: 13px; color: #999; text-decoration: line-through;
-  }
-  .price-off {
-    font-size: 12px; color: #2e7d32; font-weight: 600;
-  }
-  .tag-line {
-    font-size: 12px; color: #2e7d32; margin-bottom: 8px;
-  }
-  .badge-strip {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
-  }
+  .badge-strip { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .badge {
     font-size: 11px; padding: 4px 8px; border-radius: 999px;
     border: 1px solid #f1e0f5; background: #fdf7ff; color: #5b2b5b;
@@ -82,26 +52,18 @@
   .feature-list {
     font-size: 12px; color: #555; list-style: disc; padding-left: 16px; margin-bottom: 8px;
   }
-  .btn-row {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
-  }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
   button {
     border: none; cursor: pointer; font-size: 14px;
     padding: 10px 16px; border-radius: 6px; flex: 1 1 140px;
   }
-  .btn-primary {
-    background: #e71c64; color: #fff; font-weight: 600;
-  }
+  .btn-primary { background: #e71c64; color: #fff; font-weight: 600; }
   .btn-secondary {
     background: #ffe5f0; color: #e71c64; border: 1px solid #f5a7c8;
     font-weight: 500;
   }
-  .section-title {
-    font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222;
-  }
-  .section-subtitle {
-    font-size: 12px; color: #777; margin-bottom: 12px;
-  }
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #222; }
+  .section-subtitle { font-size: 12px; color: #777; margin-bottom: 12px; }
   label {
     display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; color: #333;
   }
@@ -109,35 +71,19 @@
     width: 100%; padding: 8px 10px; border-radius: 6px;
     border: 1px solid #ddd; font-size: 13px; margin-bottom: 10px;
   }
-  textarea {
-    resize: vertical; min-height: 70px;
-  }
-  .qr-box {
-    text-align: center; margin-top: 8px;
-  }
+  textarea { resize: vertical; min-height: 70px; }
+  .qr-box { text-align: center; margin-top: 8px; }
   #qr-reader {
     width: 320px; margin: 0 auto 16px auto;
     border: 2px solid #c093c5; border-radius: 12px;
   }
-  .btn-primary[disabled] {
-    background: #ccc; cursor: not-allowed;
-  }
+  .btn-primary[disabled] { background: #ccc; cursor: not-allowed; }
   @media (max-width: 600px) {
-    .header {
-      flex-direction: column; align-items: flex-start; gap: 6px;
-    }
-    .product-layout {
-      flex-direction: column;
-    }
-    .btn-row {
-      flex-direction: column;
-    }
-    .page {
-      border-radius: 0;
-    }
-    body {
-      padding: 0; background: #fff;
-    }
+    .header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .product-layout { flex-direction: column; }
+    .btn-row { flex-direction: column; }
+    .page { border-radius: 0; }
+    body { padding: 0; background: #fff; }
   }
 </style>
 </head>
@@ -153,7 +99,8 @@
   <section id="panel-product" class="panel active">
     <div class="product-layout">
       <div class="product-image-box">
-        <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg" alt="UltraVape Pro Kit" style="width:100%; border-radius:10px;" />
+        <img src="https://i.postimg.cc/7L6WvYK4/6503cb2be913b356c01c7659-voopoo-black-drag-vape-mod-kit-uforce.jpg"
+             alt="UltraVape Pro Kit" style="width:100%; border-radius:10px;" />
       </div>
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
@@ -163,16 +110,17 @@
           <span class="price-mrp">₹4,999</span>
           <span class="price-off">30% OFF</span>
         </div>
-        <div class="tag-line">Free delivery · Online payment only · 6-Month Warranty</div>
+        <div class="tag-line">Free delivery · 6-Month Warranty</div>
+        <div class="cod-note">Cash on Delivery is not available. Online payment only.</div>
         <div class="badge-strip">
           <span class="badge">4.7 ★ Rated</span>
           <span class="badge">Best Seller</span>
           <span class="badge">Flavors: Mango, Mint, Berry</span>
         </div>
         <ul class="feature-list">
-          <li>Delivers smooth vapor and rich flavor</li>
-          <li>Long battery life with quick charging</li>
-          <li>Portable design for convenience</li>
+          <li>Smooth vapor and rich flavor.</li>
+          <li>Long battery life with quick charging.</li>
+          <li>Portable design for daily use.</li>
         </ul>
         <div class="btn-row">
           <button id="btnBookNow" class="btn-primary">Book Now</button>
@@ -203,7 +151,7 @@
       </select>
       <div class="btn-row">
         <button id="btnAddressBack" type="button" class="btn-secondary">Back</button>
-        <button type="submit" class="btn-primary">Submit Booking</button>
+        <button type="submit" class="btn-primary">Next: Payment</button>
       </div>
     </form>
   </section>
@@ -211,29 +159,23 @@
   <!-- Payment with live QR Scanner -->
   <section id="panel-payment" class="panel">
     <div class="section-title">Payment</div>
-    <p>Scan the QR code below using your UPI app or use the live QR scanner to scan another code.</p>
+    <p>Cash on Delivery is not available. Please pay online using UPI.</p>
+    <p>1) Scan this QR code with your UPI app. 2) Or use the live scanner below to read a payment QR.</p>
     <div class="qr-box">
-      <img src="https://i.postimg.cc/1XfhwHD3/upi-qr-sample.png" alt="UPI QR" style="width:220px; border-radius: 10px; margin-bottom: 10px;" />
+      <!-- Static QR image (replace with your UPI QR) -->
+      <img src="https://i.postimg.cc/1XfhwHD3/upi-qr-sample.png"
+           alt="UPI QR" style="width:220px; border-radius: 10px; margin-bottom: 10px;" />
       <!-- Live QR scanner -->
       <div id="qr-reader"></div>
     </div>
     <p><b>UPI ID:</b> yourname@upi</p>
-    <p>After payment, screenshot and send on WhatsApp for confirmation.</p>
+    <p>After payment, take a screenshot and send it on WhatsApp for confirmation.</p>
     <div class="btn-row" style="margin-top: 14px;">
       <button id="btnPaymentBack" type="button" class="btn-secondary">Back to Address</button>
     </div>
   </section>
 
-  <!-- Tracking -->
-  <section id="panel-tracking" class="panel">
-    <h2>Your Order is Confirmed!</h2>
-    <p>Tracking ID: <b id="trackingIdDisplay"></b></p>
-    <p>Status: <b>Order Processing</b></p>
-    <p>Thank you for booking with Meesho. We will contact you soon with shipment details.</p>
-  </section>
-
 </div>
-
 
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script type="module">
@@ -257,15 +199,13 @@
   const panels = {
     product: document.getElementById("panel-product"),
     address: document.getElementById("panel-address"),
-    payment: document.getElementById("panel-payment"),
-    tracking: document.getElementById("panel-tracking")
+    payment: document.getElementById("panel-payment")
   };
 
   const btnBookNow = document.getElementById("btnBookNow");
   const btnAddressBack = document.getElementById("btnAddressBack");
   const btnPaymentBack = document.getElementById("btnPaymentBack");
   const addressForm = document.getElementById("addressForm");
-  const trackingIdDisplay = document.getElementById("trackingIdDisplay");
 
   function showPanel(name) {
     Object.values(panels).forEach(p => p.classList.remove("active"));
@@ -273,18 +213,7 @@
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 
-  // Block repeat booking using localStorage
-  function disableBookingIfOrdered() {
-    const trackingId = localStorage.getItem("meeshoVapeTrackingId");
-    if (trackingId) {
-      trackingIdDisplay.textContent = trackingId;
-      showPanel("tracking");
-      btnBookNow.disabled = true;
-      return true;
-    }
-    return false;
-  }
-
+  // Live presence
   const sessionId = "sess_" + Math.random().toString(36).substr(2,9);
   const userRef = ref(db, "liveUsers/" + sessionId);
   function updateUserPresence() {
@@ -294,12 +223,9 @@
   updateUserPresence();
   setInterval(updateUserPresence, 30000);
 
-  if(!disableBookingIfOrdered()){
-    showPanel("product");
-  }
+  showPanel("product");
 
   btnBookNow.addEventListener("click", () => {
-    if(btnBookNow.disabled) return;
     showPanel("address");
   });
 
@@ -308,7 +234,6 @@
 
   addressForm.addEventListener("submit", async e => {
     e.preventDefault();
-    if(btnBookNow.disabled) return;
 
     const name = document.getElementById("custName").value.trim();
     const phone = document.getElementById("custPhone").value.trim();
@@ -327,13 +252,8 @@
         name, phone, address, state, quantity: qty,
         timestamp: Date.now()
       });
-
-      const trackingId = "MEESHO" + Math.floor(Math.random()*900000 + 100000);
-      localStorage.setItem("meeshoVapeTrackingId", trackingId);
-      trackingIdDisplay.textContent = trackingId;
       showPanel("payment");
-      btnBookNow.disabled = true;
-      alert("Booking successful! Tracking ID: " + trackingId);
+      alert("Booking submitted. Please complete the UPI payment.");
     }catch(error){
       alert("Booking error, please try again.");
       console.error(error);
@@ -343,7 +263,8 @@
   // QR scanner
   function onScanSuccess(decodedText, decodedResult) {
     alert("QR Code scanned: " + decodedText);
-    html5QrcodeScanner.clear(); // Stop scanning after success (optional)
+    // You can comment the next line if you want continuous scanning
+    html5QrcodeScanner.clear();
   }
   function onScanError(errorMessage) {
     // ignore or log error
@@ -356,7 +277,6 @@
   );
   html5QrcodeScanner.render(onScanSuccess, onScanError);
 </script>
-
 
 </body>
 </html>
