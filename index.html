@@ -40,6 +40,18 @@
   }
   .product-details { flex: 1 1 260px; min-width: 240px; padding: 4px; }
   .product-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #222; }
+
+  /* Rating row 4.5 / 5 */
+  .rating-row {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; margin-bottom: 8px; color: #444;
+  }
+  .stars {
+    display: inline-flex; gap: 2px; color: #ffb300;
+    font-size: 16px;
+  }
+  .stars span { line-height: 1; }
+
   .product-subtitle { font-size: 13px; color: #666; margin-bottom: 10px; }
   .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 4px; }
   .price-main { font-size: 22px; font-weight: 700; color: #222; }
@@ -113,6 +125,48 @@
     border: 1px solid #f5c1dd;
   }
 
+  /* Centered notification overlay */
+  .notify-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .notify-overlay.active { display: flex; }
+  .notify-box {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 10px;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  .notify-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #222;
+  }
+  .notify-message {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .notify-close-btn {
+    margin-top: 4px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    background: #e71c64;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
   @media (max-width: 600px) {
     body { padding: 0; background: #fff; }
     .page { border-radius: 0; }
@@ -140,6 +194,15 @@
       </div>
       <div class="product-details">
         <div class="product-title">UltraVape Pro Kit</div>
+
+        <!-- Rating 4.5 / 5 stars -->
+        <div class="rating-row">
+          <div class="stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+          </div>
+          <span>4.5 / 5</span>
+        </div>
+
         <div class="product-subtitle">Compact · Long Battery · Multiple Flavors</div>
         <div class="price-row">
           <span class="price-main">₹3,499</span>
@@ -149,9 +212,8 @@
         <div class="tag-line">Free delivery · 6-Month Warranty</div>
         <div class="cod-note">Cash on Delivery is not available. Online payment only.</div>
         <div class="badge-strip">
-          <span class="badge">4.7 ★ Rated</span>
           <span class="badge">Best Seller</span>
-          <span class="badge">Flavors: Mango, Mint, Berry</span>
+          <span class="badge">Popular in vape category</span>
         </div>
         <ul class="feature-list">
           <li>Smooth vapor and rich flavor.</li>
@@ -166,9 +228,7 @@
         <!-- Dummy live comments -->
         <div class="live-comments-box">
           <div class="live-comments-header">Live shopping comments</div>
-          <div id="liveComments" class="live-comments-list">
-            <!-- comments injected by JS -->
-          </div>
+          <div id="liveComments" class="live-comments-list"></div>
         </div>
       </div>
     </div>
@@ -221,6 +281,15 @@
 
 </div>
 
+<!-- Center notification overlay -->
+<div id="notifyOverlay" class="notify-overlay">
+  <div class="notify-box">
+    <div id="notifyTitle" class="notify-title"></div>
+    <div id="notifyMessage" class="notify-message"></div>
+    <button id="notifyClose" class="notify-close-btn">OK</button>
+  </div>
+</div>
+
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
@@ -250,6 +319,25 @@
   const btnAddressBack = document.getElementById("btnAddressBack");
   const btnPaymentBack = document.getElementById("btnPaymentBack");
   const addressForm = document.getElementById("addressForm");
+
+  // Center notification helpers
+  const notifyOverlay = document.getElementById("notifyOverlay");
+  const notifyTitle = document.getElementById("notifyTitle");
+  const notifyMessage = document.getElementById("notifyMessage");
+  const notifyClose = document.getElementById("notifyClose");
+
+  function showNotify(title, message) {
+    notifyTitle.textContent = title;
+    notifyMessage.textContent = message;
+    notifyOverlay.classList.add("active");
+  }
+  function hideNotify() {
+    notifyOverlay.classList.remove("active");
+  }
+  notifyClose.addEventListener("click", hideNotify);
+  notifyOverlay.addEventListener("click", (e) => {
+    if (e.target === notifyOverlay) hideNotify();
+  });
 
   function showPanel(name) {
     Object.values(panels).forEach(p => p.classList.remove("active"));
@@ -286,7 +374,7 @@
     const qty = document.getElementById("custQty").value;
 
     if(!name || !phone || !address){
-      alert("Please fill all required fields.");
+      showNotify("Missing details", "Please fill all required fields before continuing.");
       return;
     }
 
@@ -297,21 +385,21 @@
         timestamp: Date.now()
       });
       showPanel("payment");
-      alert("Booking submitted. Please complete the UPI payment.");
+      showNotify("Booking submitted", "Your booking is saved. Please complete the UPI payment.");
     }catch(error){
-      alert("Booking error, please try again.");
       console.error(error);
+      showNotify("Booking error", "Something went wrong. Please try again.");
     }
   });
 
   // QR scanner
   function onScanSuccess(decodedText, decodedResult) {
-    alert("QR Code scanned: " + decodedText);
+    showNotify("QR Code scanned", decodedText);
     // If you want continuous scanning, comment the next line:
     html5QrcodeScanner.clear();
   }
   function onScanError(errorMessage) {
-    // ignore or log error
+    // ignore or log error silently
   }
   var html5QrcodeScanner = new Html5QrcodeScanner(
     "qr-reader",
@@ -336,13 +424,11 @@
     div.className = "live-comment";
     div.textContent = comments[commentIndex];
     liveCommentsEl.prepend(div);
-    // Keep max 6 comments visible
     while (liveCommentsEl.children.length > 6) {
       liveCommentsEl.removeChild(liveCommentsEl.lastChild);
     }
     commentIndex = (commentIndex + 1) % comments.length;
   }
-  // Start comments flow
   addNextComment();
   setInterval(addNextComment, 3000);
 </script>
